@@ -152,8 +152,7 @@ for i =1:K
         SD(i,j) = dice(aa,bb);
     end
 end
-
-figure; imagesc(SD); title('Dice Similarity') 
+figure; imagesc(SD); title('Dice Similarity'); colorbar 
 
 %% Printing results
 % Print the header
