@@ -1,1 +1,2 @@
-JASDL Code implemented publish here for synthetic dataset
+JASDL Code implemented in MATLAB published here for synthetic dataset. 
+SimTB_JASDL is the main file, however before running it you must add FastICA folder to the directory.
