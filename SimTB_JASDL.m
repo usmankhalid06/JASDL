@@ -144,7 +144,16 @@ TC_corr = mean(tt1);
 SM_corr = mean(tt2);
 F_score =F_score;    
 
+%% Dice Similarlity betwee source SMs
+for i =1:12
+    for j =1:12
+        aa = reshape(abs(SM_gw(i,:)),sqrt(V),sqrt(V)); aa = aa/norm(aa); aa(aa<=0.001)=0; aa(aa>0.001)=1;
+        bb = reshape(abs(SM_gw(j,:)),sqrt(V),sqrt(V)); bb = bb/norm(bb); bb(bb<=0.001)=0; bb(bb>0.001)=1;
+        SD(i,j) = dice(aa,bb);
+    end
+end
 
+figure; imagesc(SD); title('Dice Similarity') 
 
 %% Printing results
 % Print the header
