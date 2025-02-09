@@ -142,17 +142,38 @@ end
 
 TC_corr = mean(tt1);
 SM_corr = mean(tt2);
-F_score =F_score;    
+F_score =F_score;   
 
 %% Dice Similarlity betwee source SMs
-for i =1:K
-    for j =1:K
-        aa = reshape(abs(SM_gw(i,:)),sqrt(V),sqrt(V)); aa = aa/norm(aa); aa(aa<=0.001)=0; aa(aa>0.001)=1;
-        bb = reshape(abs(SM_gw(j,:)),sqrt(V),sqrt(V)); bb = bb/norm(bb); bb(bb<=0.001)=0; bb(bb>0.001)=1;
-        SD(i,j) = dice(aa,bb);
+f = figure; f.Position = [100 200 1500 200]; 
+nV = sqrt(V);
+for k =1:5
+    for i =1:12
+        for j =1:12
+            aa = reshape(abs(sX{k}(i,:)),nV,nV); aa = aa/norm(aa); aa(aa<=0.001)=0; aa(aa>0.001)=1;
+            bb = reshape(abs(sX{k}(j,:)),nV,nV); bb = bb/norm(bb); bb(bb<=0.001)=0; bb(bb>0.001)=1;
+            SD(i,j,k) = dice(aa,bb);
+        end
+    end
+    subplot(1,5,k); imagesc(SD(:,:,k)); 
+    if k==1
+        title('Dice Similarity (DS) of sources')    
+        xlabel('(a)'); colorbar
+    elseif k==2
+        title('DS for group ICA') 
+        xlabel('(b)'); colorbar
+    elseif k==3
+        title('DS for ssBSS')
+        xlabel('(c)'); colorbar
+    elseif k==4
+        title('DS for JASDLa') 
+        xlabel('(d)'); colorbar
+    else
+        title('DS for JASDLs')
+        xlabel('(e)'); colorbar
     end
 end
-figure; imagesc(SD); title('Dice Similarity'); colorbar 
+
 
 %% Printing results
 % Print the header
