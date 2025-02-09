@@ -1,2 +1,2 @@
 JASDL Code implemented in MATLAB published here for synthetic dataset. 
-SimTB_JASDL is the main file, however before running it you must add FastICA folder to the directory.
+SimTB_JASDL is the main file. However, before running it, you must add the FastICA folder to the MATLAB path using the `addpath` function.
