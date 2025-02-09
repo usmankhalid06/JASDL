@@ -1,3 +1,3 @@
-These files contain JASDL algorithm for the paper to be published in Scientific Reports 
+These files contain the implemetnation of JASDL algorithm for the paper to be published in Scientific Reports 
 JASDL Code implemented in MATLAB published here for synthetic dataset. 
 SimTB_JASDL is the main file. However, before running it, you must add the FastICA folder to the MATLAB path using the `addpath` function.
