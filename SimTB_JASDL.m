@@ -144,7 +144,7 @@ TC_corr = mean(tt1);
 SM_corr = mean(tt2);
 F_score =F_score;   
 
-%% Dice Similarlity betwee source SMs
+%% Dice Similarlity between source SMs
 f = figure; f.Position = [100 200 1500 200]; 
 nV = sqrt(V);
 for k =1:5
