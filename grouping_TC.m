@@ -11,5 +11,5 @@ for k =1:size(SM,1)
     [tmpDc(:,k),tt1,tt2] = svds((tmpD*tmpX)/nS,1);
     tmpDc(:,k) = tmpDc(:,k)/norm(tmpDc(:,k));
     tmptmpXc = tt1*tt2';
-    tmpXc(k,:) = sign(tmptmpXc).*max(0, bsxfun(@minus,abs(tmptmpXc),5/2));
+    tmpXc(k,:) = sign(tmptmpXc).*max(0, bsxfun(@minus,abs(tmptmpXc),0.01/2));
 end

@@ -145,35 +145,45 @@ SM_corr = mean(tt2);
 F_score =F_score;   
 
 %% Dice Similarlity between source SMs
-f = figure; f.Position = [100 200 1500 200]; 
-nV = sqrt(V);
-for k =1:5
-    for i =1:12
-        for j =1:12
-            aa = reshape(abs(sX{k}(i,:)),nV,nV); aa = aa/norm(aa); aa(aa<=0.001)=0; aa(aa>0.001)=1;
-            bb = reshape(abs(sX{k}(j,:)),nV,nV); bb = bb/norm(bb); bb(bb<=0.001)=0; bb(bb>0.001)=1;
-            SD(i,j,k) = dice(aa,bb);
-        end
-    end
-    subplot(1,5,k); imagesc(SD(:,:,k)); 
-    if k==1
-        title('Dice Similarity (DS) of sources')    
-        xlabel('(a)'); colorbar
-    elseif k==2
-        title('DS for group ICA') 
-        xlabel('(b)'); colorbar
-    elseif k==3
-        title('DS for ssBSS')
-        xlabel('(c)'); colorbar
-    elseif k==4
-        title('DS for JASDLa') 
-        xlabel('(d)'); colorbar
-    else
-        title('DS for JASDLs')
-        xlabel('(e)'); colorbar
-    end
-end
+% f = figure; f.Position = [100 200 1500 200]; 
+% nV = sqrt(V);
+% for k =1:5
+%     for i =1:12
+%         for j =1:12
+%             aa = reshape(abs(sX{k}(i,:)),nV,nV); aa = aa/norm(aa); aa(aa<=0.001)=0; aa(aa>0.001)=1;
+%             bb = reshape(abs(sX{k}(j,:)),nV,nV); bb = bb/norm(bb); bb(bb<=0.001)=0; bb(bb>0.001)=1;
+%             SD(i,j,k) = dice(aa,bb);
+%         end
+%     end
+%     subplot(1,5,k); imagesc(SD(:,:,k)); 
+%     if k==1
+%         title('Dice Similarity (DS) of sources')    
+%         xlabel('(a)'); colorbar
+%     elseif k==2
+%         title('DS for group ICA') 
+%         xlabel('(b)'); colorbar
+%     elseif k==3
+%         title('DS for ssBSS')
+%         xlabel('(c)'); colorbar
+%     elseif k==4
+%         title('DS for JASDLa') 
+%         xlabel('(d)'); colorbar
+%     else
+%         title('DS for JASDLs')
+%         xlabel('(e)'); colorbar
+%     end
+% end
 
+nV = sqrt(V);
+for k =1:4
+    for i =1:12
+        aa = reshape(abs(sX{1}(i,:)),nV,nV); aa = aa/norm(aa); aa(aa<=0.00001)=0; aa(aa>0.00001)=1;
+        bb = reshape(abs(sX{k+1}(i,:)),nV,nV); bb = bb/norm(bb); bb(bb<=0.00001)=0; bb(bb>0.00001)=1;
+        DS(i,k) = dice(aa,bb);
+    end
+    
+end
+DS2 = mean(DS);
 
 %% Printing results
 % Print the header
@@ -195,5 +205,9 @@ fprintf('  %8.4f  %8.4f   %8.4f      %8.4f\n', SM_corr(2:end));
 % Fscores for recovered SMs
 fprintf('%-60s', 'Fscores for recovered SMs:');
 fprintf('  %8.4f  %8.4f   %8.4f      %8.4f\n', F_score(1:end));
+
+% Dice Similarity for recovered SMs
+fprintf('%-60s', 'Dice Similarity Coefficient:');
+fprintf('  %8.4f  %8.4f   %8.4f      %8.4f\n', DS2(1:end));
 
 fprintf('--------------------------------------------------------------------------------------------------\n');

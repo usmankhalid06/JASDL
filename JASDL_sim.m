@@ -1,4 +1,4 @@
-function [H,Z,D,X]= JASDL_sim(Y,Hq,Zq,Dq,Xq,nIter,K,W1,W2,zeta,lambda,alpha,fac,sub)
+function [H,Z,D,X,tm]= JASDL_sim(Y,Hq,Zq,Dq,Xq,nIter,K,W1,W2,zeta,lambda,alpha,fac,sub)
     A = eye(size(Dq,2),K); 
     S = eye(K,size(Hq,1)); 
     B = zeros(K,size(Xq,1));
